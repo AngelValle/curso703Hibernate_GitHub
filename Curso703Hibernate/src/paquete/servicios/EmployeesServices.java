@@ -10,6 +10,7 @@ import paquete.clases.Employees;
 import paquete.conexiones.SessionManager;
 import paquete.dao.EmployeesDAO;
 import paquete.dao.SuperDAO;
+import paquete.sentenciasSQL.SentenciasSQL;
 
 
 public class EmployeesServices {
@@ -26,13 +27,14 @@ public class EmployeesServices {
 		boolean comprobacion = false;
 		Session s_sesion = null;
 		Transaction t_transaccion = null;
-		EmployeesDAO employeesdao = new EmployeesDAO(superdao);
+		EmployeesDAO employeesdao = null;
 		
 		List<Employees> list_employees = null;
 		
 		try
 		{	
 			s_sesion = SessionManager.obtenerSesionNueva();
+			employeesdao = new EmployeesDAO(superdao);
 			superdao.setSesion(s_sesion);
 			
 			t_transaccion = s_sesion.beginTransaction();
@@ -41,7 +43,7 @@ public class EmployeesServices {
 			
 			for (Employees empleado : list_employees) 
 			{
-				empleado.setSalary(empleado.getSalary().multiply(new BigDecimal(1.2)));
+				empleado.setSalary(empleado.getSalary().multiply(new BigDecimal(SentenciasSQL.incrementosalarioemployees)));
 			}
 			t_transaccion.commit();
 			comprobacion = true;

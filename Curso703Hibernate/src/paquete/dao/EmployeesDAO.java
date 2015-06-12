@@ -2,7 +2,6 @@ package paquete.dao;
 
 import java.util.List;
 
-import org.hibernate.Session;
 
 import paquete.clases.Employees;
 import paquete.interfaces.CRUD;
@@ -19,9 +18,9 @@ public class EmployeesDAO extends SuperDAO implements CRUD{
 	
 	public List<Employees> obtenerEmpleados()
 	{
-		Session sesion = superdao.getSesion();
 		@SuppressWarnings("unchecked")
-		List<Employees> list_employees = sesion.createSQLQuery(SentenciasSQL.recogeremployees).addEntity(Employees.class).list();
+		
+		List<Employees> list_employees = superdao.getSesion().createSQLQuery(SentenciasSQL.recogeremployees).addEntity(Employees.class).list();
 		return list_employees;
 	}
 	
@@ -29,10 +28,9 @@ public class EmployeesDAO extends SuperDAO implements CRUD{
 	public boolean create(Employees ObjectDTO) throws Exception 
 	{
 		boolean comprobacion = false;
-		Session sesion = superdao.getSesion();
 		try
 		{
-			sesion.createSQLQuery(SentenciasSQL.insertaremployees(ObjectDTO));
+			superdao.getSesion().createSQLQuery(SentenciasSQL.insertaremployees(ObjectDTO));
 			comprobacion = true;
 		}
 		catch(Exception e)
