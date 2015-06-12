@@ -6,7 +6,7 @@ import paquete.clases.Employees;
 
 public interface CRUD {
 	
-		 public boolean create (Employees ObjectDTO) throws Exception;		// Create
+		 public Employees create (Employees ObjectDTO) throws Exception;	// Create
 		 public Employees read (Employees ObjectDTO) throws Exception;		// Read
 		 public Employees update (Employees ObjectDTO) throws Exception;	// Update
 		 public boolean delete (Employees ObjectDTO) throws Exception;		// Delete

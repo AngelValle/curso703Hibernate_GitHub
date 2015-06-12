@@ -1,8 +1,10 @@
 package paquete.dao;
 
+import java.util.LinkedList;
 import java.util.List;
 
 
+import paquete.clases.Departments;
 import paquete.clases.Employees;
 import paquete.interfaces.CRUD;
 import paquete.sentenciasSQL.SentenciasSQL;
@@ -16,6 +18,24 @@ public class EmployeesDAO extends SuperDAO implements CRUD{
 		this.superdao = superdao;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Employees> recuperarListaMayorSalarioPorDepartamento()
+	{
+		List<Departments> l_departments = null;
+		List<Employees> l_employees = null;
+		LinkedList<Employees> l_employees_ordenado = new LinkedList<Employees>();
+		
+		DepartmentsDAO departamento = new DepartmentsDAO(superdao);
+		l_departments = departamento.recuperarListaDepartamentos();
+		
+		for (Departments departments : l_departments) 
+		{
+			l_employees = superdao.getSesion().createSQLQuery(SentenciasSQL.recogeremployeesordensalary(departments.getDepartmentId())).addEntity(Employees.class).list();
+			l_employees_ordenado.add(l_employees.get(1));
+		}
+		return l_employees_ordenado;
+	}
+	
 	public List<Employees> obtenerEmpleados()
 	{
 		@SuppressWarnings("unchecked")
@@ -25,20 +45,20 @@ public class EmployeesDAO extends SuperDAO implements CRUD{
 	}
 	
 	@Override
-	public boolean create(Employees ObjectDTO) throws Exception 
+	public Employees create(Employees ObjectDTO) throws Exception 
 	{
-		boolean comprobacion = false;
+		Employees empleado = null;
+		
 		try
 		{
 			superdao.getSesion().createSQLQuery(SentenciasSQL.insertaremployees(ObjectDTO));
-			comprobacion = true;
+			empleado = (Employees)superdao.getSesion().createSQLQuery(SentenciasSQL.recogeremployeesselecto(ObjectDTO)).uniqueResult();
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			comprobacion = false;
 		}
-		return comprobacion;
+		return empleado;
 		
 	}
 

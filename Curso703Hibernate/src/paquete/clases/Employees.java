@@ -27,7 +27,16 @@ public class Employees implements java.io.Serializable {
 	private Set departmentses = new HashSet(0);
 	private Set jobHistories = new HashSet(0);
 
-	public Employees() {
+	public Employees(){}
+	
+	public Employees(String FirstName, String LastName, String Email, String PhoneNumber, Date HireDate, BigDecimal Salary) 
+	{
+		this.firstName = FirstName;
+		this.lastName = LastName;
+		this.email = Email;
+		this.phoneNumber = PhoneNumber;
+		this.hireDate = HireDate;
+		this.salary = Salary;
 	}
 
 	public Employees(int employeeId, Jobs jobs, String lastName, String email,
@@ -176,7 +185,7 @@ public class Employees implements java.io.Serializable {
 	public String toString() 
 	{
 		String tostring = null;
-		tostring = "Empleado: "+firstName+" Salario: "+salary;
+		tostring = "Empleado_ID: "+employeeId+"Empleado: "+firstName+" Salario: "+salary;
 		return tostring;
 	}
 	

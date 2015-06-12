@@ -16,10 +16,75 @@ import paquete.sentenciasSQL.SentenciasSQL;
 public class EmployeesServices {
 	
 	private SuperDAO superdao = null;
+	private EmployeesDAO employeesdao = null;
 	
 	public EmployeesServices()
 	{
 		superdao = new SuperDAO();
+		employeesdao = new EmployeesDAO(superdao);
+	}
+	
+	public List<Employees> recuperarListaMayorSalarioPorDepartamento()
+	{
+		Session s_sesion = null;
+		
+		List<Employees> list_employees = null;
+		try
+		{	
+			s_sesion = SessionManager.obtenerSesionNueva();
+			superdao.setSesion(s_sesion);
+			
+
+			list_employees = employeesdao.recuperarListaMayorSalarioPorDepartamento();
+			
+			for (Employees empleado : list_employees) 
+			{
+				System.out.println(empleado);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			SessionManager.cerrarSession(s_sesion);
+			SessionManager.cerrarFactory();
+		}
+		
+		return list_employees;
+	}
+	
+	public Employees insertarEmployee(Employees employee)
+	{
+		Employees employeeinsertado = null;
+		
+		Session s_sesion = null;
+		Transaction t_transaccion = null;
+		
+		
+		try
+		{	
+			s_sesion = SessionManager.obtenerSesionNueva();
+			superdao.setSesion(s_sesion);
+			t_transaccion = s_sesion.beginTransaction();
+			
+			employeeinsertado = employeesdao.create(employee);
+			
+			t_transaccion.commit();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			t_transaccion.rollback();
+		}
+		finally
+		{
+			SessionManager.cerrarSession(s_sesion);
+			SessionManager.cerrarFactory();
+		}
+		
+		return employeeinsertado;
 	}
 	
 	public boolean incrementarSalario()
@@ -27,14 +92,12 @@ public class EmployeesServices {
 		boolean comprobacion = false;
 		Session s_sesion = null;
 		Transaction t_transaccion = null;
-		EmployeesDAO employeesdao = null;
 		
 		List<Employees> list_employees = null;
 		
 		try
 		{	
 			s_sesion = SessionManager.obtenerSesionNueva();
-			employeesdao = new EmployeesDAO(superdao);
 			superdao.setSesion(s_sesion);
 			
 			t_transaccion = s_sesion.beginTransaction();
