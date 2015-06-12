@@ -1,7 +1,6 @@
 package paquete.servicios;
 
 import java.math.BigDecimal;
-import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -15,8 +14,9 @@ import paquete.dao.SuperDAO;
 
 public class EmployeesServices {
 	
-	public static void incrementarSalario()
+	public static boolean incrementarSalario()
 	{
+		boolean comprobacion = false;
 		Session s_sesion = null;
 		Transaction t_transaccion = null;
 		EmployeesDAO employeesdao = new EmployeesDAO();
@@ -37,6 +37,7 @@ public class EmployeesServices {
 				empleado.setSalary(empleado.getSalary().multiply(new BigDecimal(1.2)));
 			}
 			t_transaccion.commit();
+			comprobacion = true;
 		}
 		catch(Exception e)
 		{
@@ -48,5 +49,6 @@ public class EmployeesServices {
 			SessionManager.cerrarSession(s_sesion);
 			SessionManager.cerrarFactory();
 		}
+		return comprobacion;
 	}
 }
