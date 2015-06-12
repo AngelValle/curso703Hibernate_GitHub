@@ -14,19 +14,26 @@ import paquete.dao.SuperDAO;
 
 public class EmployeesServices {
 	
-	public static boolean incrementarSalario()
+	private SuperDAO superdao = null;
+	
+	public EmployeesServices()
+	{
+		superdao = new SuperDAO();
+	}
+	
+	public boolean incrementarSalario()
 	{
 		boolean comprobacion = false;
 		Session s_sesion = null;
 		Transaction t_transaccion = null;
-		EmployeesDAO employeesdao = new EmployeesDAO();
+		EmployeesDAO employeesdao = new EmployeesDAO(superdao);
 		
 		List<Employees> list_employees = null;
 		
 		try
 		{	
 			s_sesion = SessionManager.obtenerSesionNueva();
-			SuperDAO.setSesion(s_sesion);
+			superdao.setSesion(s_sesion);
 			
 			t_transaccion = s_sesion.beginTransaction();
 

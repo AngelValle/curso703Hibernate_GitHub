@@ -6,7 +6,8 @@ public class MainServices {
 
 	public static void main(String[] args) {
 		
-		System.out.println("Comprobacion de Salario incrementado: "+EmployeesServices.incrementarSalario());
+		EmployeesServices employeesservice = new EmployeesServices();
+		System.out.println("Comprobacion de Salario incrementado: "+employeesservice.incrementarSalario());
 		
 	}
 

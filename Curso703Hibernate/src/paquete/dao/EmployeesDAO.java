@@ -6,14 +6,22 @@ import org.hibernate.Session;
 
 import paquete.clases.Employees;
 import paquete.interfaces.CRUD;
+import paquete.sentenciasSQL.SentenciasSQL;
 
 public class EmployeesDAO extends SuperDAO implements CRUD{
 	
+	private SuperDAO superdao = null;
+	
+	public EmployeesDAO(SuperDAO superdao)
+	{
+		this.superdao = superdao;
+	}
+	
 	public List<Employees> obtenerEmpleados()
 	{
-		Session sesion = SuperDAO.getSesion();
+		Session sesion = superdao.getSesion();
 		@SuppressWarnings("unchecked")
-		List<Employees> list_employees = sesion.createSQLQuery("SELECT * FROM EMPLOYEES").addEntity(Employees.class).list();
+		List<Employees> list_employees = sesion.createSQLQuery(SentenciasSQL.recogeremployees).addEntity(Employees.class).list();
 		return list_employees;
 	}
 	
@@ -21,10 +29,10 @@ public class EmployeesDAO extends SuperDAO implements CRUD{
 	public boolean create(Employees ObjectDTO) throws Exception 
 	{
 		boolean comprobacion = false;
-		Session sesion = SuperDAO.getSesion();
+		Session sesion = superdao.getSesion();
 		try
 		{
-			sesion.createSQLQuery("INSERT INTO EMPLOYEES VALUES "+"'"+ObjectDTO.getFirstName()+"'"+","+"'"+ObjectDTO.getLastName()+"'"+","+"'"+ObjectDTO.getEmail()+"'"+","+"'"+ObjectDTO.getPhoneNumber()+"'"+","+"'"+ObjectDTO.getHireDate()+"'"+","+"'"+ObjectDTO.getJobs()+"'"+","+"'"+ObjectDTO.getSalary()+"'");
+			sesion.createSQLQuery(SentenciasSQL.insertaremployees(ObjectDTO));
 			comprobacion = true;
 		}
 		catch(Exception e)

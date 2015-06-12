@@ -5,13 +5,13 @@ import org.hibernate.Session;
 
 public class SuperDAO {
 
-	private static Session sesion = null;
+	private Session sesion = null;
 
-	public static Session getSesion() {
+	public Session getSesion() {
 		return sesion;
 	}
 
-	public static void setSesion(Session session) {
+	public void setSesion(Session session) {
 		sesion = session;
 	}
 }
