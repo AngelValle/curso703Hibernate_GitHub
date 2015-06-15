@@ -7,21 +7,23 @@ public class SentenciasSQL {
 	public static String recogeremployees = "SELECT * FROM EMPLOYEES ";
 	public static String incrementosalarioemployees = "1.2";
 	public static String recogerlistadepartments = "SELECT DISTINCT DEPARTMENT_ID FROM EMPLOYEES WHERE department_id IS NOT NULL";
-	
-	public static String recogeremployeesordensalary(int department_id)
-	{
-		String recogeremployeesordensalary = null;
-		if(department_id==0){}
-		else if(department_id!=0)
-		{
-			recogeremployeesordensalary = "SELECT * FROM EMPLOYEES WHERE DEPARTMENT_ID = "+department_id+" ORDER BY SALARY DESC";
-		}
-		return recogeremployeesordensalary;
-	}
+//	public static String recogerempleadomasasalariadodecadadepartamento = "SELECT * FROM EMPLOYEES WHERE (DEPARTMENT_ID, SALARY) IN (SELECT DEPARTMENT_ID, MAX(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID) ORDER BY DEPARTMENT_ID DESC";
 	
 	public static String recogeremployeesselecto(Employees ObjectDTO)
 	{
 		String recogeremployeesselecto = "SELECT * FROM EMPLOYEES WHERE EMPLOYEE_ID = "+ObjectDTO.getEmployeeId();
+		return recogeremployeesselecto;
+	}
+	
+	public static String recogeremployeespordepartamento(int departamento)
+	{
+		String recogeremployeesselecto = "SELECT * FROM EMPLOYEES WHERE DEPARTMENT_ID = "+departamento+" ORDER BY SALARY DESC";
+		return recogeremployeesselecto;
+	}
+	
+	public static String recogeremployeesselectoid(int ID)
+	{
+		String recogeremployeesselecto = "SELECT * FROM EMPLOYEES WHERE EMPLOYEE_ID = "+ID;
 		return recogeremployeesselecto;
 	}
 			

@@ -2,7 +2,6 @@ package paquete.dao;
 
 import java.util.List;
 
-import paquete.clases.Departments;
 import paquete.sentenciasSQL.SentenciasSQL;
 
 public class DepartmentsDAO {

@@ -31,10 +31,19 @@ public class EmployeesDAO extends SuperDAO implements CRUD{
 		for (Object departament : l_departments) 
 		{
 			BigDecimal department = (BigDecimal)departament;
-			l_employees = superdao.getSesion().createSQLQuery(SentenciasSQL.recogeremployeesordensalary((int)department.longValue())).addEntity(Employees.class).list();
+			l_employees = recuperarListaEmployeesPorDepartamento(department.intValue());
 			l_employees_ordenado.add(l_employees.get(0));
 		}
 		return l_employees_ordenado;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Employees> recuperarListaEmployeesPorDepartamento(int DEPARTMENT_ID)
+	{
+		List<Employees> l_employees = null;
+		l_employees = superdao.getSesion().createSQLQuery(SentenciasSQL.recogeremployeespordepartamento(DEPARTMENT_ID)).addEntity(Employees.class).list();
+
+		return l_employees;
 	}
 	
 	public List<Employees> obtenerEmpleados()

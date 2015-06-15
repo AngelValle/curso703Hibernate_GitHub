@@ -1,7 +1,7 @@
 package main;
 
-import java.math.BigDecimal;
-import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import paquete.clases.Employees;
 import paquete.servicios.EmployeesServices;
@@ -11,9 +11,16 @@ public class MainServices {
 	public static void main(String[] args) {
 		
 		EmployeesServices employeesservice = new EmployeesServices();
-//		System.out.println("Comprobacion de Salario incrementado: "+employeesservice.incrementarSalario());
-//		System.out.println(employeesservice.insertarEmployee(new Employees("Angel", "Valle", "angel.sine.leganes@gmail.com", "666555444", new Date(1993, 02, 01), new BigDecimal(20000))));
-		employeesservice.recuperarListaMayorSalarioPorDepartamento();
+		List<Employees> l_employees = employeesservice.recuperarListaMayorSalarioPorDepartamento();
+		
+		
+		// RECORREMOS Y COMPROBAMOS
+		Iterator<Employees> it_employees = l_employees.iterator();
+		while(it_employees.hasNext())
+		{
+			System.out.println(it_employees.next().toString());
+		}
+		
 	}
 
 }

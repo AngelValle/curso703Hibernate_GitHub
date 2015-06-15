@@ -34,13 +34,7 @@ public class EmployeesServices {
 			s_sesion = SessionManager.obtenerSesionNueva();
 			superdao.setSesion(s_sesion);
 			
-
 			list_employees = employeesdao.recuperarListaMayorSalarioPorDepartamento();
-			
-			for (Employees empleado : list_employees) 
-			{
-				System.out.println(empleado);
-			}
 		}
 		catch(Exception e)
 		{
@@ -61,7 +55,6 @@ public class EmployeesServices {
 		
 		Session s_sesion = null;
 		Transaction t_transaccion = null;
-		
 		
 		try
 		{	
@@ -119,7 +112,7 @@ public class EmployeesServices {
 		finally
 		{
 			SessionManager.cerrarSession(s_sesion);
-			SessionManager.cerrarFactory();
+//			SessionManager.cerrarFactory();
 		}
 		return comprobacion;
 	}
