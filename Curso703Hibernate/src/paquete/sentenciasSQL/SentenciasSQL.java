@@ -14,7 +14,7 @@ public class SentenciasSQL {
 		if(department_id==0){}
 		else if(department_id!=0)
 		{
-			recogeremployeesordensalary = "SELECT * FROM EMPLOYEES WHERE ID_DEPARTMENT = "+"'"+department_id+"'"+"ORDER BY SALARY DESC";
+			recogeremployeesordensalary = "SELECT * FROM EMPLOYEES WHERE DEPARTMENT_ID = "+department_id+" ORDER BY SALARY DESC";
 		}
 		return recogeremployeesordensalary;
 	}

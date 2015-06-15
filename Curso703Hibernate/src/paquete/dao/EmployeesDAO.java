@@ -1,10 +1,10 @@
 package paquete.dao;
 
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
 
-import paquete.clases.Departments;
 import paquete.clases.Employees;
 import paquete.interfaces.CRUD;
 import paquete.sentenciasSQL.SentenciasSQL;
@@ -21,17 +21,18 @@ public class EmployeesDAO extends SuperDAO implements CRUD{
 	@SuppressWarnings("unchecked")
 	public List<Employees> recuperarListaMayorSalarioPorDepartamento()
 	{
-		List<Departments> l_departments = null;
+		List l_departments = null;
 		List<Employees> l_employees = null;
 		LinkedList<Employees> l_employees_ordenado = new LinkedList<Employees>();
 		
 		DepartmentsDAO departamento = new DepartmentsDAO(superdao);
 		l_departments = departamento.recuperarListaDepartamentos();
 		
-		for (Departments departments : l_departments) 
+		for (Object departament : l_departments) 
 		{
-			l_employees = superdao.getSesion().createSQLQuery(SentenciasSQL.recogeremployeesordensalary(departments.getDepartmentId())).addEntity(Employees.class).list();
-			l_employees_ordenado.add(l_employees.get(1));
+			BigDecimal department = (BigDecimal)departament;
+			l_employees = superdao.getSesion().createSQLQuery(SentenciasSQL.recogeremployeesordensalary((int)department.longValue())).addEntity(Employees.class).list();
+			l_employees_ordenado.add(l_employees.get(0));
 		}
 		return l_employees_ordenado;
 	}

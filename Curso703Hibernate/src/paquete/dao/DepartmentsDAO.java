@@ -14,10 +14,9 @@ public class DepartmentsDAO {
 		this.superdao = superdao;
 	}
 	
-	public List<Departments> recuperarListaDepartamentos()
+	public List recuperarListaDepartamentos()
 	{
-		@SuppressWarnings("unchecked")
-		List<Departments> list_employees = superdao.getSesion().createSQLQuery(SentenciasSQL.recogerlistadepartments).addEntity(Departments.class).list();
+		List list_employees = superdao.getSesion().createSQLQuery(SentenciasSQL.recogerlistadepartments).list();
 		return list_employees;
 	}
 }
