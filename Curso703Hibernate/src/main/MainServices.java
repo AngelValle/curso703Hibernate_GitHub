@@ -12,7 +12,17 @@ public class MainServices {
 		
 		EmployeesServices employeesservice = new EmployeesServices();
 		List<Employees> l_employees = employeesservice.recuperarListaMayorSalarioPorDepartamento();
+//		List<Employees> l_employees2 = employeesservice.recuperarListaEmployeesPorDepartamento(10);
 		
+		
+		
+		
+		// RECORREMOS Y COMPROBAMOS
+//		Iterator<Employees> it_employees2 = l_employees2.iterator();
+//		while(it_employees2.hasNext())
+//		{
+//			System.out.println(it_employees2.next().toString());
+//		}
 		
 		// RECORREMOS Y COMPROBAMOS
 		Iterator<Employees> it_employees = l_employees.iterator();

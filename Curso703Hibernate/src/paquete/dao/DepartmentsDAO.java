@@ -15,7 +15,7 @@ public class DepartmentsDAO {
 	
 	public List recuperarListaDepartamentos()
 	{
-		List list_employees = superdao.getSesion().createSQLQuery(SentenciasSQL.recogerlistadepartments).list();
-		return list_employees;
+		List list_departments = superdao.getSesion().createSQLQuery(SentenciasSQL.recogerlistadepartments).list();
+		return list_departments;
 	}
 }

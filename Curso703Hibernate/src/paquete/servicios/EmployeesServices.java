@@ -27,14 +27,39 @@ public class EmployeesServices {
 	public List<Employees> recuperarListaMayorSalarioPorDepartamento()
 	{
 		Session s_sesion = null;
-		
 		List<Employees> list_employees = null;
+		
 		try
 		{	
 			s_sesion = SessionManager.obtenerSesionNueva();
 			superdao.setSesion(s_sesion);
 			
 			list_employees = employeesdao.recuperarListaMayorSalarioPorDepartamento();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			SessionManager.cerrarSession(s_sesion);
+			SessionManager.cerrarFactory();
+		}
+		
+		return list_employees;
+	}
+	
+	public List<Employees> recuperarListaEmployeesPorDepartamento(int DEPARTMENT_ID)
+	{	
+		Session s_sesion = null;
+		List<Employees> list_employees = null;
+		
+		try
+		{	
+			s_sesion = SessionManager.obtenerSesionNueva();
+			superdao.setSesion(s_sesion);
+			
+			list_employees = employeesdao.recuperarListaEmployeesPorDepartamento(DEPARTMENT_ID);
 		}
 		catch(Exception e)
 		{

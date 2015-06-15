@@ -40,8 +40,7 @@ public class EmployeesDAO extends SuperDAO implements CRUD{
 	@SuppressWarnings("unchecked")
 	public List<Employees> recuperarListaEmployeesPorDepartamento(int DEPARTMENT_ID)
 	{
-		List<Employees> l_employees = null;
-		l_employees = superdao.getSesion().createSQLQuery(SentenciasSQL.recogeremployeespordepartamento(DEPARTMENT_ID)).addEntity(Employees.class).list();
+		List<Employees> l_employees = superdao.getSesion().createSQLQuery(SentenciasSQL.recogeremployeespordepartamento(DEPARTMENT_ID)).addEntity(Employees.class).list();
 
 		return l_employees;
 	}
