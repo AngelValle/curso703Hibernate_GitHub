@@ -41,14 +41,12 @@ public class EmployeesDAO extends SuperDAO implements CRUD{
 	public List<Employees> recuperarListaEmployeesPorDepartamento(int DEPARTMENT_ID)
 	{
 		List<Employees> l_employees = superdao.getSesion().createSQLQuery(SentenciasSQL.recogeremployeespordepartamento(DEPARTMENT_ID)).addEntity(Employees.class).list();
-
 		return l_employees;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Employees> obtenerEmpleados()
 	{
-		@SuppressWarnings("unchecked")
-		
 		List<Employees> list_employees = superdao.getSesion().createSQLQuery(SentenciasSQL.recogeremployees).addEntity(Employees.class).list();
 		return list_employees;
 	}
@@ -68,12 +66,13 @@ public class EmployeesDAO extends SuperDAO implements CRUD{
 			e.printStackTrace();
 		}
 		return empleado;
-		
 	}
 
 	@Override
-	public Employees read(Employees ObjectDTO) throws Exception {
-		return null;
+	public Employees read(Employees ObjectDTO) throws Exception 
+	{
+		Employees empleadobuscado = (Employees)superdao.getSesion().createSQLQuery(SentenciasSQL.recogeremployeesselecto(ObjectDTO)).addEntity(Employees.class).uniqueResult();
+		return empleadobuscado;
 	}
 
 	@Override
@@ -85,9 +84,4 @@ public class EmployeesDAO extends SuperDAO implements CRUD{
 	public boolean delete(Employees ObjectDTO) throws Exception {
 		return false;
 	}
-
-	
-	
-
-
 }

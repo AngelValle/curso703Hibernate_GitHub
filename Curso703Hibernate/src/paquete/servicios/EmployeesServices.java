@@ -137,8 +137,61 @@ public class EmployeesServices {
 		finally
 		{
 			SessionManager.cerrarSession(s_sesion);
-//			SessionManager.cerrarFactory();
+			SessionManager.cerrarFactory();
 		}
 		return comprobacion;
+	}
+	
+//	public Employees leerEmpleado(Employees empleado)
+//	{
+//		Employees empleadorecibido = empleado;
+//		Session s_sesion = null;
+//		
+//		try
+//		{	
+//			s_sesion = SessionManager.obtenerSesionNueva();
+//			superdao.setSesion(s_sesion);
+//			
+//			empleadorecibido = employeesdao.read(empleado);
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//		finally
+//		{
+//			SessionManager.cerrarSession(s_sesion);
+//			SessionManager.cerrarFactory();
+//		}
+//		
+//		return list_employees;
+//	}
+	
+	public Employees leerEmpleadoID(int id_empleado)
+	{
+		Employees empleadorecibido = new Employees();
+		Employees empleadodevuelta = new Employees();
+		Session s_sesion = null;
+
+		empleadorecibido.setEmployeeId(id_empleado);
+		
+		try
+		{	
+			s_sesion = SessionManager.obtenerSesionNueva();
+			superdao.setSesion(s_sesion);
+			
+			empleadodevuelta = employeesdao.read(empleadorecibido);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			SessionManager.cerrarSession(s_sesion);
+			SessionManager.cerrarFactory();
+		}
+		
+		return empleadodevuelta;
 	}
 }

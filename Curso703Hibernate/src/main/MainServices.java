@@ -11,8 +11,10 @@ public class MainServices {
 	public static void main(String[] args) {
 		
 		EmployeesServices employeesservice = new EmployeesServices();
-		List<Employees> l_employees = employeesservice.recuperarListaMayorSalarioPorDepartamento();
+//		List<Employees> l_employees = employeesservice.recuperarListaMayorSalarioPorDepartamento();
 //		List<Employees> l_employees2 = employeesservice.recuperarListaEmployeesPorDepartamento(10);
+		Employees empleado = employeesservice.leerEmpleadoID(101);
+		System.out.println(empleado);
 		
 		
 		
@@ -25,11 +27,11 @@ public class MainServices {
 //		}
 		
 		// RECORREMOS Y COMPROBAMOS
-		Iterator<Employees> it_employees = l_employees.iterator();
-		while(it_employees.hasNext())
-		{
-			System.out.println(it_employees.next().toString());
-		}
+//		Iterator<Employees> it_employees = l_employees.iterator();
+//		while(it_employees.hasNext())
+//		{
+//			System.out.println(it_employees.next().toString());
+//		}
 		
 	}
 
