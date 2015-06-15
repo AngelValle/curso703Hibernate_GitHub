@@ -185,7 +185,7 @@ public class Employees implements java.io.Serializable {
 	public String toString() 
 	{
 		String tostring = null;
-		tostring = "Empleado_ID: "+employeeId+"Empleado: "+firstName+" Salario: "+salary+" Departamento_ID: "+departments.getDepartmentId();
+		tostring = "Empleado_ID: "+employeeId+" Empleado: "+firstName+" Salario: "+salary+" Departamento_ID: "+departments.getDepartmentId();
 		return tostring;
 	}
 	
