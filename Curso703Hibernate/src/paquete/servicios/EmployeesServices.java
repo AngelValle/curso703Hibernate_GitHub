@@ -194,4 +194,32 @@ public class EmployeesServices {
 		
 		return empleadodevuelta;
 	}
+	
+	public boolean borrarEmpleadoID(int id_empleado)
+	{
+		Employees empleadorecibido = new Employees();
+		Boolean comprobacion = false;
+		Session s_sesion = null;
+
+		empleadorecibido.setEmployeeId(id_empleado);
+		
+		try
+		{	
+			s_sesion = SessionManager.obtenerSesionNueva();
+			superdao.setSesion(s_sesion);
+			
+			comprobacion = employeesdao.delete(empleadorecibido);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			SessionManager.cerrarSession(s_sesion);
+			SessionManager.cerrarFactory();
+		}
+		
+		return comprobacion;
+	}
 }

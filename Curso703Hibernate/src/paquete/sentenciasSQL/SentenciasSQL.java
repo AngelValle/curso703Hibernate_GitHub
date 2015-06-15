@@ -32,4 +32,10 @@ public class SentenciasSQL {
 		String insertaremployees = "INSERT INTO EMPLOYEES VALUES "+"'"+ObjectDTO.getFirstName()+"'"+","+"'"+ObjectDTO.getLastName()+"'"+","+"'"+ObjectDTO.getEmail()+"'"+","+"'"+ObjectDTO.getPhoneNumber()+"'"+","+"'"+ObjectDTO.getHireDate()+"'"+","+"'"+ObjectDTO.getSalary()+"'";
 		return insertaremployees;
 	}
+	
+	public static String borraremployees(Employees ObjectDTO)
+	{
+		String borraremployees = "DELETE FROM EMPLOYEES WHERE EMPLOYEE_ID = "+ObjectDTO.getEmployeeId();
+		return borraremployees;
+	}
 }

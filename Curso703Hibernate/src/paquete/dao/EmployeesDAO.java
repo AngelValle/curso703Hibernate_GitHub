@@ -40,14 +40,30 @@ public class EmployeesDAO extends SuperDAO implements CRUD{
 	@SuppressWarnings("unchecked")
 	public List<Employees> recuperarListaEmployeesPorDepartamento(int DEPARTMENT_ID)
 	{
-		List<Employees> l_employees = superdao.getSesion().createSQLQuery(SentenciasSQL.recogeremployeespordepartamento(DEPARTMENT_ID)).addEntity(Employees.class).list();
+		List<Employees> l_employees = null;
+		try
+		{
+			l_employees = superdao.getSesion().createSQLQuery(SentenciasSQL.recogeremployeespordepartamento(DEPARTMENT_ID)).addEntity(Employees.class).list();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		return l_employees;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Employees> obtenerEmpleados()
 	{
-		List<Employees> list_employees = superdao.getSesion().createSQLQuery(SentenciasSQL.recogeremployees).addEntity(Employees.class).list();
+		List<Employees> list_employees = null;
+		try
+		{
+			list_employees = superdao.getSesion().createSQLQuery(SentenciasSQL.recogeremployees).addEntity(Employees.class).list();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		return list_employees;
 	}
 	
@@ -71,7 +87,15 @@ public class EmployeesDAO extends SuperDAO implements CRUD{
 	@Override
 	public Employees read(Employees ObjectDTO) throws Exception 
 	{
-		Employees empleadobuscado = (Employees)superdao.getSesion().createSQLQuery(SentenciasSQL.recogeremployeesselecto(ObjectDTO)).addEntity(Employees.class).uniqueResult();
+		Employees empleadobuscado = null;
+		try
+		{
+			empleadobuscado = (Employees)superdao.getSesion().createSQLQuery(SentenciasSQL.recogeremployeesselecto(ObjectDTO)).addEntity(Employees.class).uniqueResult();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		return empleadobuscado;
 	}
 
@@ -81,7 +105,19 @@ public class EmployeesDAO extends SuperDAO implements CRUD{
 	}
 
 	@Override
-	public boolean delete(Employees ObjectDTO) throws Exception {
-		return false;
+	public boolean delete(Employees ObjectDTO) throws Exception 
+	{
+		boolean comprobacion = false;
+		try
+		{
+			superdao.getSesion().createSQLQuery(SentenciasSQL.borraremployees(ObjectDTO));
+			comprobacion = true;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			comprobacion = false;
+		}
+		return comprobacion;
 	}
 }
