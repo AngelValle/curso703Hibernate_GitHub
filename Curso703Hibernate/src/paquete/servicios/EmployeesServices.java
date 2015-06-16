@@ -43,7 +43,6 @@ public class EmployeesServices {
 		finally
 		{
 			SessionManager.cerrarSession(s_sesion);
-			SessionManager.cerrarFactory();
 		}
 		
 		return list_employees;
@@ -68,7 +67,6 @@ public class EmployeesServices {
 		finally
 		{
 			SessionManager.cerrarSession(s_sesion);
-			SessionManager.cerrarFactory();
 		}
 		
 		return list_employees;
@@ -99,7 +97,6 @@ public class EmployeesServices {
 		finally
 		{
 			SessionManager.cerrarSession(s_sesion);
-			SessionManager.cerrarFactory();
 		}
 		
 		return employeeinsertado;
@@ -137,7 +134,6 @@ public class EmployeesServices {
 		finally
 		{
 			SessionManager.cerrarSession(s_sesion);
-			SessionManager.cerrarFactory();
 		}
 		return comprobacion;
 	}
@@ -161,7 +157,6 @@ public class EmployeesServices {
 //		finally
 //		{
 //			SessionManager.cerrarSession(s_sesion);
-//			SessionManager.cerrarFactory();
 //		}
 //		
 //		return list_employees;
@@ -189,7 +184,6 @@ public class EmployeesServices {
 		finally
 		{
 			SessionManager.cerrarSession(s_sesion);
-			SessionManager.cerrarFactory();
 		}
 		
 		return empleadodevuelta;
@@ -217,9 +211,23 @@ public class EmployeesServices {
 		finally
 		{
 			SessionManager.cerrarSession(s_sesion);
-			SessionManager.cerrarFactory();
 		}
-		
+		return comprobacion;
+	}
+	
+	public boolean cerrarFactory()
+	{
+		boolean comprobacion;
+		try
+		{
+			SessionManager.cerrarFactory();
+			comprobacion = true;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			comprobacion = false;
+		}
 		return comprobacion;
 	}
 }
