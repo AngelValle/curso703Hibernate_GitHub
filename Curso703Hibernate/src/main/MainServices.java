@@ -1,5 +1,7 @@
 package main;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -53,18 +55,20 @@ public class MainServices {
 			case 1: employeesservice.incrementarSalario();
 				break;
 			case 2: l_employees = employeesservice.recuperarListaMayorSalarioPorDepartamento();
-					for (Employees employees : l_employees) {
+					for (Employees employees : l_employees) 
+					{
 						System.out.println(employees);
 					}
 				break;
 			case 3: System.out.println("Por favor, ingrese un numero de DEPARTAMENTO");
 					departamento = pedirInt();
 					l_employees = employeesservice.recuperarListaEmployeesPorDepartamento(departamento);
-					for (Employees employees : l_employees) {
+					for (Employees employees : l_employees) 
+					{
 						System.out.println(employees);
 					}
 				break;
-			case 4: //employeesservice.insertarEmployee(employee);
+			case 4: employeesservice.insertarEmployee(new Employees("Angel", "Valle", "email@email.com", "666777888", new Date(1993, 02, 01), new BigDecimal(80000)));
 				break;
 			case 5: System.out.println("Por favor, imgrese un ID de empleado");
 					idempleado = pedirInt();

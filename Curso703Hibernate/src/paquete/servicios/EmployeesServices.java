@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.jboss.logging.Logger;
 
 import paquete.clases.Employees;
 import paquete.conexiones.SessionManager;
@@ -15,6 +16,7 @@ import paquete.sentenciasSQL.SentenciasSQL;
 
 public class EmployeesServices {
 	
+	private final static Logger logger = Logger.getLogger("mylog");
 	private SuperDAO superdao = null;
 	private EmployeesDAO employeesdao = null;
 	
@@ -38,13 +40,14 @@ public class EmployeesServices {
 		}
 		catch(Exception e)
 		{
+			logger.fatal("ERROR AL RECUPERAR LISTA POR MAYOR SALARIO DE CADA DEPARTAMENTO.");
 			e.printStackTrace();
 		}
 		finally
 		{
 			SessionManager.cerrarSession(s_sesion);
 		}
-		
+		logger.info("LA LISTA DE EMPLEADOS MAYOR ASALARIADOS POR DEPARTAMENTO HA SIDO RECUPERADA EXITOSAMENTE.");
 		return list_employees;
 	}
 	
@@ -62,13 +65,14 @@ public class EmployeesServices {
 		}
 		catch(Exception e)
 		{
+			logger.fatal("ERROR AL RECUPERAR LISTA DE EMPLEADOS POR DEPARTAMENTO_ID.");
 			e.printStackTrace();
 		}
 		finally
 		{
 			SessionManager.cerrarSession(s_sesion);
 		}
-		
+		logger.info("LA LISTA DE EMPLEADOS POR DEPARTAMENTO_ID HA SIDO RECUPERADA EXITOSAMENTE.");
 		return list_employees;
 	}
 	
@@ -91,6 +95,7 @@ public class EmployeesServices {
 		}
 		catch(Exception e)
 		{
+			logger.fatal("ERROR AL INSERTAR EMPLEADO EN LA TABLA EMPLOYEES.");
 			e.printStackTrace();
 			t_transaccion.rollback();
 		}
@@ -98,7 +103,7 @@ public class EmployeesServices {
 		{
 			SessionManager.cerrarSession(s_sesion);
 		}
-		
+		logger.info("EL EMPLEADO HA SIDO INSERTADO EXITOSAMENTE.");
 		return employeeinsertado;
 	}
 	
@@ -128,6 +133,7 @@ public class EmployeesServices {
 		}
 		catch(Exception e)
 		{
+			logger.fatal("ERROR AL INCREMENTAR SALARIOS DE EMPLEADOS EN LA TABLA EMPLOYEES.");
 			e.printStackTrace();
 			t_transaccion.rollback();
 		}
@@ -135,6 +141,7 @@ public class EmployeesServices {
 		{
 			SessionManager.cerrarSession(s_sesion);
 		}
+		logger.info("EL SALARIO DE LOS EMPLEADOS DE LA TABLA EMPLOYEES HA SIDO INCREMENTADO EXITOSAMENTE.");
 		return comprobacion;
 	}
 	
@@ -179,13 +186,14 @@ public class EmployeesServices {
 		}
 		catch(Exception e)
 		{
+			logger.fatal("ERROR AL LEER EMPLEADO DE LA TABLA EMPLOYEES.");
 			e.printStackTrace();
 		}
 		finally
 		{
 			SessionManager.cerrarSession(s_sesion);
 		}
-		
+		logger.info("EL EMPLEADO HA SIDO LEIDO EXITOSAMENTE.");
 		return empleadodevuelta;
 	}
 	
@@ -206,12 +214,14 @@ public class EmployeesServices {
 		}
 		catch(Exception e)
 		{
+			logger.fatal("ERROR AL BORRAR EMPLEADO DE LA TABLA EMPLOYEES.");
 			e.printStackTrace();
 		}
 		finally
 		{
 			SessionManager.cerrarSession(s_sesion);
 		}
+		logger.info("EL EMPLEADO HA SIDO BORRADO EXITOSAMENTE.");
 		return comprobacion;
 	}
 	
@@ -225,9 +235,11 @@ public class EmployeesServices {
 		}
 		catch(Exception e)
 		{
+			logger.fatal("ERROR AL CERRAR LA SESSION FACTORY.");
 			e.printStackTrace();
 			comprobacion = false;
 		}
+		logger.info("LA SESSION FACTORY HA SIDO CERRADA EXITOSAMENTE.");
 		return comprobacion;
 	}
 }

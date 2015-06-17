@@ -18,7 +18,6 @@ public class EmployeesDAO extends SuperDAO implements CRUD{
 		this.superdao = superdao;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Employees> recuperarListaMayorSalarioPorDepartamento()
 	{
 		List l_departments = null;
@@ -27,12 +26,13 @@ public class EmployeesDAO extends SuperDAO implements CRUD{
 		
 		DepartmentsDAO departamento = new DepartmentsDAO(superdao);
 		l_departments = departamento.recuperarListaDepartamentos();
-		
+				
 		for (Object departament : l_departments) 
 		{
 			BigDecimal department = (BigDecimal)departament;
 			l_employees = recuperarListaEmployeesPorDepartamento(department.intValue());
 			l_employees_ordenado.add(l_employees.get(0));
+			l_employees.clear();
 		}
 		return l_employees_ordenado;
 	}

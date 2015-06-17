@@ -29,6 +29,17 @@ public class Employees implements java.io.Serializable {
 
 	public Employees(){}
 	
+	public Employees(int EMPLOYEE_ID, String FIRST_NAME, String LAST_NAME, String EMAIL, String PHONE_NUMBER, BigDecimal SALARY)
+	{
+		this.employeeId=EMPLOYEE_ID;
+		this.firstName=FIRST_NAME;
+		this.lastName=LAST_NAME;
+		this.email=EMAIL;
+		this.phoneNumber=PHONE_NUMBER;
+		this.salary=SALARY;
+
+	}
+	
 	public Employees(String FirstName, String LastName, String Email, String PhoneNumber, Date HireDate, BigDecimal Salary) 
 	{
 		this.firstName = FirstName;
@@ -185,7 +196,7 @@ public class Employees implements java.io.Serializable {
 	public String toString() 
 	{
 		String tostring = null;
-		tostring = "Empleado_ID: "+employeeId+" Departamento_ID: "+departments.getDepartmentId()+" Empleado: "+firstName+" Salario: "+salary;
+		tostring = "Empleado_ID: "+employeeId+" | Departamento_ID: "+departments.getDepartmentId()+" | Empleado: "+firstName+" | Salario: "+salary;
 		return tostring;
 	}
 	
