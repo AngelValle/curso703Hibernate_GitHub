@@ -1,0 +1,8 @@
+main
+paquete.clases
+paquete.conexiones
+paquete.dao
+paquete.interfaces
+paquete.jpa
+paquete.sentenciasSQL
+paquete.servicios

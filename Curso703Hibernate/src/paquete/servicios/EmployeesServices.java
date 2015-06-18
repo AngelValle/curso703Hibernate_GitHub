@@ -13,19 +13,34 @@ import paquete.dao.EmployeesDAO;
 import paquete.dao.SuperDAO;
 import paquete.sentenciasSQL.SentenciasSQL;
 
-
+/**
+ * Capa SERVICE de la clase EMPLOYEES.
+ * 
+ * Esta clase service contiene los metodos para operar con la clase employees.
+ * @author Angel Valle
+ * 
+ */
 public class EmployeesServices {
 	
 	private final static Logger logger = Logger.getLogger("mylog");
 	private SuperDAO superdao = null;
 	private EmployeesDAO employeesdao = null;
 	
+	/**
+	 * Constructor que crea un SuperDAO(Clase que contiene una session) y hace una instancia de employeesdao pasandole el mismo SuperDAO para compartir session.
+	 */
 	public EmployeesServices()
 	{
 		superdao = new SuperDAO();
 		employeesdao = new EmployeesDAO(superdao);
 	}
 	
+	/**
+	 * Metodo que recoge el mayor asalariado de cada departamento.
+	 * 
+	 * @return 
+	 * List de Employees
+	 */
 	public List<Employees> recuperarListaMayorSalarioPorDepartamento()
 	{
 		Session s_sesion = null;
@@ -51,6 +66,13 @@ public class EmployeesServices {
 		return list_employees;
 	}
 	
+	/**
+	 * Metodo que recoge los empleados de un departamento concreto.
+	 * @param DEPARTMENT_ID
+	 * Recoge un "int" que será el DEPARTMENT_ID
+	 * @return
+	 * List de Employees
+	 */
 	public List<Employees> recuperarListaEmployeesPorDepartamento(int DEPARTMENT_ID)
 	{	
 		Session s_sesion = null;
@@ -76,7 +98,14 @@ public class EmployeesServices {
 		return list_employees;
 	}
 	
-	public Employees insertarEmployee(Employees employee)
+	/**
+	 * Metodo utilizado para insertar un empleado en la base de datos EMPLOYEES.
+	 * @param employee
+	 * Objeto Empleado que posteriormente insertaremos en la base de datos.
+	 * @return
+	 * Nos devuelve un Employee, resultado de una consulta a la BD del Employee insertado anteriormente.
+	 */
+	public Employees insertarEmployee(Employees employee) // No funciona, comprobar.
 	{
 		Employees employeeinsertado = null;
 		
@@ -107,6 +136,11 @@ public class EmployeesServices {
 		return employeeinsertado;
 	}
 	
+	/**
+	 * Metodo para incrementar a todos los empleados el salario, SentenciasSQL.incrementosalarioemployees = Porcentaje de incremento.
+	 * @return
+	 * Nos devuelve un Boolean como comprobacion del metodo. True = Echo , False = Error.
+	 */
 	public boolean incrementarSalario()
 	{
 		boolean comprobacion = false;
@@ -145,30 +179,13 @@ public class EmployeesServices {
 		return comprobacion;
 	}
 	
-//	public Employees leerEmpleado(Employees empleado)
-//	{
-//		Employees empleadorecibido = empleado;
-//		Session s_sesion = null;
-//		
-//		try
-//		{	
-//			s_sesion = SessionManager.obtenerSesionNueva();
-//			superdao.setSesion(s_sesion);
-//			
-//			empleadorecibido = employeesdao.read(empleado);
-//		}
-//		catch(Exception e)
-//		{
-//			e.printStackTrace();
-//		}
-//		finally
-//		{
-//			SessionManager.cerrarSession(s_sesion);
-//		}
-//		
-//		return list_employees;
-//	}
-	
+	/**
+	 * Metodo para leer un empleado (Employee) de la BD.
+	 * @param id_empleado
+	 * Recogemos un INT que posteriormente utilizaremos para su busqueda por Employee_ID
+	 * @return
+	 * Nos devuelve un empleado (Employee) leido.
+	 */
 	public Employees leerEmpleadoID(int id_empleado)
 	{
 		Employees empleadorecibido = new Employees();
@@ -197,6 +214,13 @@ public class EmployeesServices {
 		return empleadodevuelta;
 	}
 	
+	/**
+	 * Metodo para borrar un empleado de la BD.
+	 * @param id_empleado
+	 * Recogemos un INT que posteriormente usaremos para borrar el empleado por Employee_ID
+	 * @return
+	 * Nos devuelve un boolean con la comprobacion del metodo, True = Echo, False = Error.
+	 */
 	public boolean borrarEmpleadoID(int id_empleado)
 	{
 		Employees empleadorecibido = new Employees();
@@ -225,6 +249,11 @@ public class EmployeesServices {
 		return comprobacion;
 	}
 	
+	/**
+	 * Metodo obligatorio de uso final para cerrar el factory del SuperDAO.
+	 * @return
+	 * Nos devuelve un boolean con la comprobacion del metodo, True = Echo, False = Error.
+	 */
 	public boolean cerrarFactory()
 	{
 		boolean comprobacion;

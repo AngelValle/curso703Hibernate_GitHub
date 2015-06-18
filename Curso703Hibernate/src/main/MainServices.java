@@ -36,9 +36,8 @@ public class MainServices {
 			System.out.println(" ||    1º Incrementar Salario                  || ");
 			System.out.println(" ||    2º Recuperar Lista Mayor Asalariados    || ");
 			System.out.println(" ||    3º Recuperar Lista Por Departamento     || ");
-			System.out.println(" ||    4º Insertar Empleado                    || ");
-			System.out.println(" ||    5º Buscar empleado por ID               || ");
-			System.out.println(" ||    6º Salir (Cierra Factory)               || ");
+			System.out.println(" ||    4º Buscar empleado por ID               || ");
+			System.out.println(" ||    5º Salir (Cierra Factory)               || ");
 			System.out.println(" ================================================ ");
 			System.out.println();
 			
@@ -68,14 +67,12 @@ public class MainServices {
 						System.out.println(employees);
 					}
 				break;
-			case 4: employeesservice.insertarEmployee(new Employees("Angel", "Valle", "email@email.com", "666777888", new Date(1993, 02, 01), new BigDecimal(80000)));
-				break;
-			case 5: System.out.println("Por favor, imgrese un ID de empleado");
+			case 4: System.out.println("Por favor, imgrese un ID de empleado");
 					idempleado = pedirInt();
 					empleado = employeesservice.leerEmpleadoID(idempleado);
 					System.out.println(empleado);
 				break;
-			case 6: employeesservice.cerrarFactory();
+			case 5: employeesservice.cerrarFactory();
 					salir = true;
 				break;
 			}

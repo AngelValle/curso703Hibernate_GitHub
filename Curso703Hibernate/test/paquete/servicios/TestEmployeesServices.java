@@ -16,14 +16,12 @@ import paquete.sentenciasSQL.SentenciasSQL;
 
 public class TestEmployeesServices {
 	
-	SessionFactory s_factory = null;
 	Session s_session = null;
 	SuperDAO superdao = new SuperDAO();
 	
 	@Before
 	public void startTest()
 	{
-		s_factory = SessionManager.getSessionFactory();
 		s_session = SessionManager.obtenerSesionNueva();
 		superdao.setSesion(s_session);
 	}
@@ -43,14 +41,16 @@ public class TestEmployeesServices {
 	@Test
 	public void testIncrementarSalario() 
 	{
-		int ID = 100;
+		int ID = 101;
+		
 		Employees empleado1 = (Employees)s_session.createSQLQuery(SentenciasSQL.recogeremployeesselectoid(ID)).addEntity(Employees.class).uniqueResult();
 		s_session.evict(empleado1);
+		
 		EmployeesServices employeesservices = new EmployeesServices();
-		System.out.println(empleado1);
 		employeesservices.incrementarSalario();
+		
 		Employees empleado2 = (Employees)s_session.createSQLQuery(SentenciasSQL.recogeremployeesselectoid(ID)).addEntity(Employees.class).uniqueResult();
-		System.out.println(empleado2);
+		s_session.evict(empleado2);
 		assertTrue(empleado1.getSalary().intValue()<empleado2.getSalary().intValue());
 	}
 

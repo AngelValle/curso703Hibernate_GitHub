@@ -9,15 +9,34 @@ import paquete.clases.Employees;
 import paquete.interfaces.CRUD;
 import paquete.sentenciasSQL.SentenciasSQL;
 
+
+/**
+ * Capa DAO de la clase EMPLOYEES.
+ * 
+ * Esta clase dao contiene los metodos para operar con la clase employees a nivel BD.
+ * @author Angel Valle
+ *
+ */
 public class EmployeesDAO extends SuperDAO implements CRUD{
 	
 	private SuperDAO superdao = null;
 	
+	/**
+	 * Constructor sobrecargado que recoge un SuperDAO para compartir la misma session que la clase Service que lo llama
+	 * @param superdao
+	 * SuperDAO que contiene la session desde la que vamos a hacer la transaccion.
+	 */
 	public EmployeesDAO(SuperDAO superdao)
 	{
 		this.superdao = superdao;
 	}
 	
+	/**
+	 * Metodo que recoge el mayor asalariado de cada departamento (Dependiente de recuperarListaEmployeesPorDepartamento).
+	 * 
+	 * @return 
+	 * List de Employees
+	 */
 	public List<Employees> recuperarListaMayorSalarioPorDepartamento()
 	{
 		List l_departments = null;
@@ -37,6 +56,13 @@ public class EmployeesDAO extends SuperDAO implements CRUD{
 		return l_employees_ordenado;
 	}
 	
+	/**
+	 * Metodo que recoge los empleados de un departamento concreto.
+	 * @param DEPARTMENT_ID
+	 * Recoge un "int" que será el DEPARTMENT_ID
+	 * @return
+	 * List de Employees
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Employees> recuperarListaEmployeesPorDepartamento(int DEPARTMENT_ID)
 	{
@@ -52,6 +78,11 @@ public class EmployeesDAO extends SuperDAO implements CRUD{
 		return l_employees;
 	}
 	
+	/**
+	 * Metodo que recoge todos los empleados de la tabla EMPLOYEES.
+	 * @return
+	 * List de Employees
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Employees> obtenerEmpleados()
 	{
