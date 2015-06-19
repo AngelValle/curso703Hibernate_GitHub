@@ -1,11 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 10-jun-2015 20:39:16 by Hibernate Tools 4.0.0 -->
-<hibernate-mapping package="paquete.clases">
+<!-- Generated 19-jun-2015 15:32:14 by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
     <class name="Locations" table="LOCATIONS">
-        <comment>Locations table that contains specific address of a specific office, warehouse, and/or production site of a company. Does not store addresses / locations of
-        customers. Contains 23 rows; references with the departments and countries tables.</comment>
         <id name="locationId" type="short">
             <column name="LOCATION_ID" precision="4" scale="0" />
             <generator class="assigned" />
